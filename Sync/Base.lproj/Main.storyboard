@@ -68,19 +68,33 @@
                                     <constraint firstAttribute="height" constant="40" id="yPh-HJ-JF5"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ds-j6-xXw">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ds-j6-xXw">
                                 <rect key="frame" x="0.0" y="114" width="414" height="699"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£1,720.21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLA-aP-on5">
-                                        <rect key="frame" x="170.5" y="12" width="73" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-i5-0J3">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="699"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLA-aP-on5">
+                                                <rect key="frame" x="207" y="8" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="xLA-aP-on5" firstAttribute="top" secondItem="hvE-i5-0J3" secondAttribute="top" constant="8" id="DqJ-O3-Nlt"/>
+                                            <constraint firstItem="xLA-aP-on5" firstAttribute="centerX" secondItem="hvE-i5-0J3" secondAttribute="centerX" id="NFs-eC-R60"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="xLA-aP-on5" firstAttribute="centerX" secondItem="5ds-j6-xXw" secondAttribute="centerX" id="R9E-DW-GPI"/>
-                                    <constraint firstItem="xLA-aP-on5" firstAttribute="top" secondItem="5ds-j6-xXw" secondAttribute="top" constant="12" id="Xvm-4V-Moj"/>
+                                    <constraint firstAttribute="bottom" secondItem="hvE-i5-0J3" secondAttribute="bottom" id="6kC-Hq-qox"/>
+                                    <constraint firstItem="hvE-i5-0J3" firstAttribute="width" secondItem="5ds-j6-xXw" secondAttribute="width" id="N9v-pB-Ia9"/>
+                                    <constraint firstItem="hvE-i5-0J3" firstAttribute="top" secondItem="5ds-j6-xXw" secondAttribute="top" id="aDv-d9-R9f"/>
+                                    <constraint firstAttribute="trailing" secondItem="hvE-i5-0J3" secondAttribute="trailing" id="aRj-hn-QXW"/>
+                                    <constraint firstItem="hvE-i5-0J3" firstAttribute="height" secondItem="5ds-j6-xXw" secondAttribute="height" priority="250" id="h8e-9c-hte"/>
+                                    <constraint firstItem="hvE-i5-0J3" firstAttribute="leading" secondItem="5ds-j6-xXw" secondAttribute="leading" id="vZT-1o-1Jo"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

@@ -78,12 +78,17 @@ class CustomTabBarController: UITabBarController {
     
     override func viewWillLayoutSubviews() {
         if (bFirst){
+            var bottomPadding  : CGFloat = 0
+            if #available(iOS 11.0, *) {
+                bottomPadding = view.safeAreaInsets.bottom
+            }
+            
             bFirst = false
             var tabFrame = self.tabBar.frame
             tabFrame.size.height = tabFrame.size.height + kBarHeightOffset
             tabFrame.origin.y = self.view.frame.size.height - tabFrame.size.height
             self.tabBar.frame = tabFrame
-            qrButton.center = CGPoint.init(x: self.tabBar.center.x, y: self.tabBar.center.y - 10)
+            qrButton.center = CGPoint.init(x: self.tabBar.center.x, y: self.tabBar.center.y - 10 - bottomPadding/2)
 
             semiCircle.frame = self.tabBar.bounds
         }

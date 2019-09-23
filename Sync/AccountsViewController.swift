@@ -23,30 +23,58 @@ class AccountsViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
-        let attributedString = NSMutableAttributedString(string: "£1,720.21", attributes: [
+        var request = URLRequest(url: URL(string: "https://reqres.in/api/users")!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+            print(response!)
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                if let total = json["total"]?.doubleValue {
+                    DispatchQueue.main.async {
+                        self.showAmount(amount: total)
+                    }
+
+                } else {
+                    print("Parsing Issue")
+                }
+                print(json)
+
+            } catch {
+                print("error")
+            }
+        })
+        
+        task.resume()
+    }
+
+
+    func showAmount(amount : Double){
+
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
+        let formattedNumber = numberFormatter.string(from: NSNumber(value:amount))!
+        
+        let symbol = NSMutableAttributedString(string: "£", attributes: [
+            .font: UIFont.systemFont(ofSize: 30.0, weight: .semibold),
+            .foregroundColor: UIColor(red: 29/255.0, green: 29/255.0, blue: 40/255.0, alpha: 1),
+            .kern: -0.21
+            ])
+        
+        let attributedString = NSMutableAttributedString(string: formattedNumber, attributes: [
             .font: UIFont.systemFont(ofSize: 38.0, weight: .semibold),
             .foregroundColor: UIColor(red: 29/255.0, green: 29/255.0, blue: 40/255.0, alpha: 1),
             .kern: 0.0
             ])
-        attributedString.addAttributes([
-            .font: UIFont.systemFont(ofSize: 30.0, weight: .semibold),
-            .kern: -0.21
-            ], range: NSRange(location: 0, length: 1))
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40.0, weight: .semibold), range: NSRange(location: 6, length: 1))
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 34.0, weight: .semibold), range: NSRange(location: 7, length: 2))
-        
-        lbAmount?.attributedText = attributedString
+        let length = formattedNumber.count
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40.0, weight: .semibold), range: NSRange(location: length - 3, length: 1))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 34.0, weight: .semibold), range: NSRange(location: length - 2, length: 2))
+        symbol.append(attributedString)
+        self.lbAmount?.attributedText = symbol
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
